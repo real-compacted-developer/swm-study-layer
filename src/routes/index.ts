@@ -3,6 +3,6 @@ import userAPI from './study-router';
 
 const router = Router();
 
-router.use('/', userAPI);
+router.use('/group', userAPI);
 
 export default router;
