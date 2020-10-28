@@ -29,7 +29,7 @@ const studyCreateValidator = [
   body('password').isString(),
   body('maxPeople').isNumeric(),
   body('owner').isString(),
-  body('isPremium').isBoolean(),
+  body('isPremium').isBoolean()
 ];
 router.post('/', studyCreateValidator, async (req: Request, res: Response) => {
   const errors = validationResult(req);
