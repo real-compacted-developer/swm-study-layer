@@ -2,6 +2,7 @@ import { Request, Response, Router } from 'express';
 import { body, validationResult } from 'express-validator';
 import crypto from 'crypto';
 import { createStudyGroup, deleteStudyGroup, getAllStudyGroups, getStudyGroup } from '../fetch/study-group-fetch';
+import { createStudyData } from '../fetch/study-data-fetch';
 
 const router = Router();
 
@@ -57,6 +58,13 @@ router.post('/', studyCreateValidator, async (req: Request, res: Response) => {
     maxPeople: parseInt(maxPeople, 10),
     owner,
     isPremium: isPremium.toString().toLowerCase() === 'true'
+  });
+
+  await createStudyData({
+    week: 1,
+    date: new Date(),
+    slideInfo: [],
+    studyGroupId: result.id
   });
 
   res.status(200).json({
