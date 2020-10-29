@@ -1,7 +1,6 @@
 import axios from 'axios';
 import config from '../config';
 import { StudyDataType } from '../types/studydata';
-import { logger } from '../index';
 
 interface CreateBody {
   readonly week: number;
@@ -10,7 +9,6 @@ interface CreateBody {
   readonly studyGroupId: string;
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export const createStudyData = async (props: CreateBody): Promise<StudyDataType> => {
   const res = await axios.post(`${config.DB_LAYER_API}/studydata`, {
     week: props.week,
@@ -18,5 +16,10 @@ export const createStudyData = async (props: CreateBody): Promise<StudyDataType>
     slideInfo: props.slideInfo,
     studyGroupId: props.studyGroupId
   });
+  return res.data.data;
+};
+
+export const getStudyDataByGroupId = async (id: string): Promise<StudyDataType[]> => {
+  const res = await axios.get(`${config.DB_LAYER_API}/studydata/bystudy/${id}`);
   return res.data.data;
 };
