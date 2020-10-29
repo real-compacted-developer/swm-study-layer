@@ -11,7 +11,7 @@ interface CreateBody {
 
 // eslint-disable-next-line import/prefer-default-export
 export const createStudyData = async (props: CreateBody): Promise<StudyDataType> => {
-  const res = await axios.post(`${config.DB_LAYER_API}/studygroup`, {
+  const res = await axios.post(`${config.DB_LAYER_API}/studydata`, {
     week: props.week,
     date: props.date,
     slideInfo: props.slideInfo,
