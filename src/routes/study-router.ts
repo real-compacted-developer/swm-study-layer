@@ -3,6 +3,7 @@ import { body, validationResult } from 'express-validator';
 import crypto from 'crypto';
 import { createStudyGroup, deleteStudyGroup, getAllStudyGroups, getStudyGroup } from '../fetch/study-group-fetch';
 import { createStudyData } from '../fetch/study-data-fetch';
+import { logger } from '../index';
 
 const router = Router();
 
@@ -60,9 +61,12 @@ router.post('/', studyCreateValidator, async (req: Request, res: Response) => {
     isPremium: isPremium.toString().toLowerCase() === 'true'
   });
 
+  const date = new Date();
+  const dateFormat = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+
   await createStudyData({
     week: 1,
-    date: new Date(),
+    date: dateFormat,
     slideInfo: [],
     studyGroupId: result.id
   });

@@ -1,10 +1,11 @@
 import axios from 'axios';
 import config from '../config';
 import { StudyDataType } from '../types/studydata';
+import { logger } from '../index';
 
 interface CreateBody {
   readonly week: number;
-  readonly date: Date;
+  readonly date: string;
   readonly slideInfo: string[];
   readonly studyGroupId: string;
 }
