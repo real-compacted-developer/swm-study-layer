@@ -2,9 +2,12 @@ import cors from 'cors';
 import express from 'express';
 import log4js from 'log4js';
 import BaseRouter from './routes';
+import StudyPeople from './stores/StudyPeople';
 
 export const app = express();
 export const logger = log4js.getLogger();
+
+export const PeopleStore = new StudyPeople();
 
 log4js.configure({
   appenders: {
