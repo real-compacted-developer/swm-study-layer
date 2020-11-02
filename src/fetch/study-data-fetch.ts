@@ -23,3 +23,8 @@ export const getStudyDataByGroupId = async (id: string): Promise<StudyDataType[]
   const res = await axios.get(`${config.DB_LAYER_API}/studydata/bystudy/${id}`);
   return res.data.data;
 };
+
+export const getStudyData = async (id: string): Promise<StudyDataType> => {
+  const res = await axios.get(`${config.DB_LAYER_API}/studydata/${id}`);
+  return res.data.data;
+};

@@ -2,8 +2,7 @@ import { Request, Response, Router } from 'express';
 import { body, validationResult } from 'express-validator';
 import crypto from 'crypto';
 import { createStudyGroup, deleteStudyGroup, getAllStudyGroups, getStudyGroup } from '../fetch/study-group-fetch';
-import { createStudyData, getStudyDataByGroupId } from '../fetch/study-data-fetch';
-import { logger } from '../index';
+import { createStudyData, getStudyData, getStudyDataByGroupId } from '../fetch/study-data-fetch';
 
 const router = Router();
 
@@ -39,6 +38,18 @@ router.get('/data/:studyGroupId', async (req, res) => {
   res.status(200).json({
     success: true,
     data: result[0]
+  });
+});
+
+router.get('/info/:studyDataId', async (req, res) => {
+  const { studyDataId } = req.params;
+
+  const result = await getStudyData(studyDataId);
+  const data = await getStudyGroup(result.studyGroupId);
+
+  res.status(200).json({
+    success: true,
+    data
   });
 });
 
