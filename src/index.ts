@@ -38,7 +38,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use('/', BaseRouter);
 
-const httpServer = http.createServer(app);
+export const httpServer = http.createServer(app);
 export const io = socket(httpServer);
 
 initSocket();
