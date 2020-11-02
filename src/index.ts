@@ -1,8 +1,11 @@
 import cors from 'cors';
 import express from 'express';
 import log4js from 'log4js';
+import http from 'http';
+import socket from 'socket.io';
 import BaseRouter from './routes';
 import StudyPeople from './stores/StudyPeople';
+import initSocket from './sockets';
 
 export const app = express();
 export const logger = log4js.getLogger();
@@ -34,3 +37,8 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use('/', BaseRouter);
+
+const httpServer = http.createServer(app);
+export const io = socket(httpServer);
+
+initSocket();
