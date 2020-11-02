@@ -3,41 +3,41 @@ type RoomId = UUID;
 type UserId = UUID;
 
 class StudyPeople {
-  private readonly peopleList: Record<RoomId, UserId[]>;
+  private static peopleList: Record<RoomId, UserId[]>;
 
   constructor() {
-    this.peopleList = {};
+    StudyPeople.peopleList = {};
   }
 
   join(room: RoomId, user: UserId) {
-    if (this.peopleList[room] === undefined) {
-      this.peopleList[room] = [];
+    if (StudyPeople.peopleList[room] === undefined) {
+      StudyPeople.peopleList[room] = [];
     }
 
-    this.peopleList[room].push(user);
-    return this.peopleList[room];
+    StudyPeople.peopleList[room].push(user);
+    return StudyPeople.peopleList[room];
   }
 
   quit(room: RoomId, user: UserId) {
-    if (this.peopleList[room] === undefined) {
-      this.peopleList[room] = [];
+    if (StudyPeople.peopleList[room] === undefined) {
+      StudyPeople.peopleList[room] = [];
     }
 
-    const index = this.peopleList[room].findIndex((v) => v === user);
-    this.peopleList[room].splice(index, 1);
-    return this.peopleList[room];
+    const index = StudyPeople.peopleList[room].findIndex((v) => v === user);
+    StudyPeople.peopleList[room].splice(index, 1);
+    return StudyPeople.peopleList[room];
   }
 
   getPeople(room: RoomId) {
-    if (this.peopleList[room] === undefined) {
-      this.peopleList[room] = [];
+    if (StudyPeople.peopleList[room] === undefined) {
+      StudyPeople.peopleList[room] = [];
     }
 
-    return this.peopleList[room];
+    return StudyPeople.peopleList[room];
   }
 
   size(room: RoomId) {
-    return this.peopleList[room].length;
+    return StudyPeople.peopleList[room].length;
   }
 }
 
